@@ -6,11 +6,15 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.tab-list {
+  padding-left:0.5em;
 }
-
+.tab-content {
+  padding: 0.1em 1em;
+}
+.tab-hidden {
+  display: none;
+}
 * {
   box-sizing: border-box;
 }
