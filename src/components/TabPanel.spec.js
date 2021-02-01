@@ -1,7 +1,6 @@
 import React from "react";
-import { shallow } from "enzyme";
-import Router from 'next/router'
 import TabPanel from "./TabPanel";
+import {render, screen} from '@testing-library/react'
 
 const mockPush = jest.fn();
 
@@ -13,7 +12,7 @@ jest.mock("next/router", () => ({
 
 describe("The TabPanel Component", () => {
   it("renders without crashing", () => {
-    shallow(
+    render(
       <TabPanel
         id="testing"
         label="testing"
@@ -22,13 +21,19 @@ describe("The TabPanel Component", () => {
     );
   });
   it("renders sets a default tab correctly", () => {
-    shallow(
+    render(
       <TabPanel
         id="testing-id"
         label="testing"
-        tabs={[{ id: "test-tab-id", title: "test", content: <div>test</div> }]}
+        tabs={[
+          { id: "test-tab-1-id", title: "test title 1", content: <div>test content 1</div> },
+          { id: "test-tab-2-id", title: "test title 2", content: <div>test content 2</div> },
+        ]}
       />
     );
-    expect(mockPush).toHaveBeenCalledWith({"query": {"testing-id-selected": "test-tab-id"}});
+    expect(screen.getByText('test title 1')).toBeVisible()
+    expect(screen.getByText('test content 1')).toBeVisible()
+    expect(screen.getByText('test title 2')).toBeVisible()
+    expect(screen.getByText('test content 2')).not.toBeVisible()
   });
 });

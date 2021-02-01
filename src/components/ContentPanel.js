@@ -2,7 +2,8 @@ const ContentPanel = ({ selected, id, children }) => <div
   role="tabpanel"
   id={id}
   className={selected ? "content-panel" : "tab-hidden"}
-  aria-hidden={selected}
+  aria-hidden={!selected}
+  hidden={!selected}
 >
   {children}
 </div>;

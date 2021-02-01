@@ -1,8 +1,8 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { render } from "@testing-library/react";
 import ContentPanel from "./ContentPanel";
 describe("The ContentPanel Component", () => {
   it("renders without crashing", () => {
-    shallow(<ContentPanel />);
+    render(<ContentPanel />);
   });
 });
