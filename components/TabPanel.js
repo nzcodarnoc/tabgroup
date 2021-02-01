@@ -34,7 +34,7 @@ function getQuery(id) {
   return queryParams[queryKey(id)];
 }
 
-export default (props) => {
+const TabPanel = props => {
   const router = useRouter();
 
   const [state, setState] = useState(
@@ -94,3 +94,5 @@ export default (props) => {
     </div>
   );
 };
+
+export default TabPanel;
