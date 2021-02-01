@@ -4,6 +4,7 @@ import { ButtonGroup, Paper } from "@material-ui/core";
 import queryString from "query-string";
 import Tab from "./Tab";
 import ContentPanel from "./ContentPanel";
+import PropTypes from "prop-types";
 
 function generateState(tabs, selectedId) {
   const generatedState = {};
@@ -26,7 +27,7 @@ function queryKey(id) {
 function pushHistory(tabId, id, router) {
   const query = queryString.parse(location.search);
   query[queryKey(id)] = tabId;
-  router.push({ query });
+  if (getQuery(id) != tabId) router.push({ query });
 }
 
 function getQuery(id) {
@@ -34,7 +35,7 @@ function getQuery(id) {
   return queryParams[queryKey(id)];
 }
 
-const TabPanel = props => {
+const TabPanel = (props) => {
   const router = useRouter();
 
   const [state, setState] = useState(
@@ -93,6 +94,18 @@ const TabPanel = props => {
       </Paper>
     </div>
   );
+};
+
+TabPanel.propTypes = {
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  tabs: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.node.isRequired,
+    })
+  ).isRequired,
 };
 
 export default TabPanel;
