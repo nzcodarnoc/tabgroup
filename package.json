@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "@testing-library/user-event": "^12.6.3",
     "next": "^10.0.6",
     "pa11y": "^5.3.0",
     "pa11y-ci": "^2.4.0",
