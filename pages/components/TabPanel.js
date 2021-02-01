@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Paper } from "@material-ui/core";
 import queryString from "query-string";
-import dynamic from "next/dynamic";
 
 export default function Home() {
   const router = useRouter();
@@ -65,11 +64,11 @@ export default function Home() {
             aria-selected={state.socrates.selected}
             color={state.socrates.selected ? "primary" : ""}
             variant="contained"
-            aria-controls="tab-socrates"
+            aria-controls="content-socrates"
             id="tab-socrates"
-            data-deletable=""
-            tabIndex="0"
+            tabIndex="1"
             onClick={() => didSelectTab("socrates")}
+            aria-labelledby="tab-socrates"
           >
             Socrates
           </Button>
@@ -78,11 +77,11 @@ export default function Home() {
             aria-selected={state.plato.selected}
             color={state.plato.selected ? "primary" : ""}
             variant="contained"
-            aria-controls="tab-plato"
+            aria-controls="content-plato"
             id="tab-plato"
-            data-deletable=""
-            tabIndex="1"
+            tabIndex="2"
             onClick={() => didSelectTab("plato")}
+            aria-labelledby="tab-plato"
           >
             Plato
           </Button>
@@ -91,11 +90,11 @@ export default function Home() {
             aria-selected={state.aristotle.selected}
             color={state.aristotle.selected ? "primary" : ""}
             variant="contained"
-            aria-controls="tab-aristotle"
+            aria-controls="content-aristotle"
             id="tab-aristotle"
-            data-deletable=""
-            tabIndex="2"
+            tabIndex="3"
             onClick={() => didSelectTab("aristotle")}
+            aria-labelledby="tab-aristotle"
           >
             Aristotle
           </Button>
@@ -105,8 +104,8 @@ export default function Home() {
         <div
           role="tabpanel"
           id="content-socrates"
-          aria-labelledby="socrates"
           className={state.socrates.selected ? "tab-content" : "tab-hidden"}
+          aria-hidden={state.socrates.selected}
         >
           <p>
             Socrates was a Greek philosopher from Athens who is credited as one
@@ -120,8 +119,7 @@ export default function Home() {
         <div
           role="tabpanel"
           id="content-plato"
-          aria-labelledby="plato"
-          hidden=""
+          aria-hidden={state.socrates.selected}
           className={state.plato.selected ? "tab-content" : "tab-hidden"}
         >
           <p>
@@ -134,8 +132,7 @@ export default function Home() {
         <div
           role="tabpanel"
           id="content-aristotle"
-          aria-labelledby="aristotle"
-          hidden=""
+          aria-hidden={state.socrates.selected}
           className={state.aristotle.selected ? "tab-content" : "tab-hidden"}
         >
           <p>
