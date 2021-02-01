@@ -1,0 +1,8 @@
+{
+  "defaults": {
+    "standard": "Section508"
+  },
+  "urls": [
+    ".next/server/pages/en-US.html"
+  ]
+}

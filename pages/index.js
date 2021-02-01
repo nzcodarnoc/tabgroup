@@ -1,5 +1,6 @@
-import { useState } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Paper, Container } from "@material-ui/core";
 
 export default function Home() {
@@ -14,19 +15,31 @@ export default function Home() {
       selected: false,
     },
   });
+  const router = useRouter();
+
+  useEffect(() => {
+    const { philosopher } = router.query;
+    if (philosopher && state[philosopher]) {
+      didSelectTab(philosopher);
+    }
+  }, [router.query]);
 
   const didSelectTab = (tab) => {
     if (state[tab].selected) return;
+    router.push({
+      query: { philosopher: tab },
+    });
     setState({
       socrates: {
-        selected: tab === 'socrates',
+        selected: tab === "socrates",
       },
       aristotle: {
-        selected: tab === 'aristotle',
+        selected: tab === "aristotle",
       },
       plato: {
-        selected: tab === 'plato',
-      }});
+        selected: tab === "plato",
+      },
+    });
   };
 
   return (
@@ -37,8 +50,8 @@ export default function Home() {
 
       <main>
         <h1>Tab Panel ft. Accessibility</h1>
-        <div class="tabs">
-          <div role="tablist" aria-label="Entertainment" class="tab-list">
+        <div className="tabs">
+          <div role="tablist" aria-label="Entertainment" className="tab-list">
             <ButtonGroup
               variant="text"
               disableElevation
@@ -52,6 +65,7 @@ export default function Home() {
                 aria-controls="tab-socrates"
                 id="tab-socrates"
                 data-deletable=""
+                tabIndex="0"
                 onClick={() => didSelectTab("socrates")}
               >
                 Socrates
@@ -59,11 +73,12 @@ export default function Home() {
               <Button
                 role="tab"
                 aria-selected={state.plato.selected}
-                color={state.plato.selected ? "primary" :""}
+                color={state.plato.selected ? "primary" : ""}
                 variant="contained"
                 aria-controls="tab-plato"
                 id="tab-plato"
                 data-deletable=""
+                tabIndex="1"
                 onClick={() => didSelectTab("plato")}
               >
                 Plato
@@ -75,8 +90,8 @@ export default function Home() {
                 variant="contained"
                 aria-controls="tab-aristotle"
                 id="tab-aristotle"
-                tabindex="-1"
                 data-deletable=""
+                tabIndex="2"
                 onClick={() => didSelectTab("aristotle")}
               >
                 Aristotle
@@ -85,11 +100,10 @@ export default function Home() {
           </div>
           <Paper>
             <div
-              tabindex="0"
               role="tabpanel"
-              id="tab-socrates"
-              aria-labelledby="nils"
-              class={state.socrates.selected ? "tab-content" : "tab-hidden" }
+              id="content-socrates"
+              aria-labelledby="socrates"
+              className={state.socrates.selected ? "tab-content" : "tab-hidden"}
             >
               <p>
                 Socrates was a Greek philosopher from Athens who is credited as
@@ -102,12 +116,11 @@ export default function Home() {
               </p>
             </div>
             <div
-              tabindex="0"
               role="tabpanel"
-              id="tab-plato"
-              aria-labelledby="agnes"
+              id="content-plato"
+              aria-labelledby="plato"
               hidden=""
-              class={state.plato.selected ? "tab-content" : "tab-hidden" }
+              className={state.plato.selected ? "tab-content" : "tab-hidden"}
             >
               <p>
                 Plato was an Athenian philosopher during the Classical period in
@@ -117,12 +130,13 @@ export default function Home() {
               </p>
             </div>
             <div
-              tabindex="0"
               role="tabpanel"
-              id="tab-aristotle"
-              aria-labelledby="complex"
+              id="content-aristotle"
+              aria-labelledby="aristotle"
               hidden=""
-              class={state.aristotle.selected ? "tab-content" : "tab-hidden" }
+              className={
+                state.aristotle.selected ? "tab-content" : "tab-hidden"
+              }
             >
               <p>
                 Aristotle was a Greek philosopher and polymath during the
