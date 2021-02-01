@@ -14,7 +14,7 @@ export default function Home() {
 
       <main>
         <h1>Tab Panel ft. Accessibility</h1>
-        <Box m={3}>
+        <Box mb={3}>
           <TabPanel
             id="SPA"
             label="Philosophers"
@@ -61,7 +61,7 @@ export default function Home() {
             ]}
           />
         </Box>
-        <Box m={3}>
+        <Box mb={3}>
           <TabPanel
             id="cats"
             label="Cats"
