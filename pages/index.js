@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Container, Box } from "@material-ui/core";
 import dynamic from "next/dynamic";
-const TabPanel = dynamic(() => import("../components/TabPanel"), {
+const TabPanel = dynamic(() => import("../src/components/TabPanel"), {
   ssr: false,
 });
 
@@ -102,6 +102,63 @@ export default function Home() {
                     typically 25% to 75% white with large orange and black
                     patches; however, the calico cat can have any three colors
                     in its pattern.
+                  </p>
+                ),
+              },
+            ]}
+          />
+        </Box>
+        <Box mb={3}>
+          <TabPanel
+            id="carbs"
+            label="Food staples"
+            tabs={[
+              {
+                id: "pasta",
+                title: "Pasta",
+                content: (
+                  <p>
+                    Pasta is a type of food typically made from an unleavened
+                    dough of wheat flour mixed with water or eggs, and formed
+                    into sheets or other shapes, then cooked by boiling or
+                    baking.
+                  </p>
+                ),
+              },
+              {
+                id: "rice",
+                title: "Rice",
+                content: (
+                  <p>
+                    Rice is the seed of the grass species Oryza sativa or less
+                    commonly Oryza glaberrima. As a cereal grain, it is the most
+                    widely consumed staple food for a large part of the world's
+                    human population, especially in Asia and Africa.
+                  </p>
+                ),
+              },
+              {
+                id: "bread",
+                title: "Bread",
+                content: (
+                  <p>
+                    Bread is a staple food prepared from a dough of flour and
+                    water, usually by baking. Throughout recorded history, it
+                    has been a prominent food in large parts of the world.
+                  </p>
+                ),
+              },
+              {
+                id: "potato",
+                title: "Potato",
+                content: (
+                  <p>
+                    The potato is a root vegetable native to the Americas, a
+                    starchy tuber of the plant Solanum tuberosum, and the plant
+                    itself is a perennial in the nightshade family, Solanaceae.
+                    Wild potato species, originating in modern-day Peru, can be
+                    found throughout the Americas, from Canada to southern
+                    Chile.
                   </p>
                 ),
               },
