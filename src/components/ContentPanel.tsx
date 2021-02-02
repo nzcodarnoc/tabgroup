@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
+import { ContentPanelInterface } from "../types";
 
-const ContentPanel = ({ selected, id, children }) => (
+const ContentPanel = ({ selected, id, children }: ContentPanelInterface) => (
   <div
     role="tabpanel"
     id={id}

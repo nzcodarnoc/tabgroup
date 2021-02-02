@@ -1,7 +1,8 @@
 import { Button } from "@material-ui/core";
 import PropTypes from "prop-types";
+import { TabButtonInterface } from "../types";
 
-const Tab = ({ selected, ariaControls, id, onClick, children }) => (
+const Tab = ({ selected, ariaControls, id, onClick, children }: TabButtonInterface) => (
   <Button
     role="tab"
     aria-selected={selected}

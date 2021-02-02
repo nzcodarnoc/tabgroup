@@ -118,4 +118,34 @@ describe("The TabPanel Component", () => {
     expect(screen.getByText("other title 2")).toBeVisible();
     expect(screen.getByText("other content 2")).not.toBeVisible();
   });
+  it("selecting a tab updates the router", () => {
+    render(
+      <TabPanel
+        id="testing-id"
+        label="testing"
+        tabs={[
+          {
+            id: "test-tab-1-id",
+            title: "test title 1",
+            content: <div>test content 1</div>,
+          },
+          {
+            id: "test-tab-2-id",
+            title: "test title 2",
+            content: <div>test content 2</div>,
+          },
+        ]}
+      />,
+    );
+    expect(mockPush.mock.calls[mockPush.mock.calls.length - 1][0]).toEqual({
+      query: { "testing-id-selected": "test-tab-1-id" },
+    });
+
+    userEvent.click(screen.getByText("test title 2"));
+
+    // TODO: mock window.location for testing
+    // expect(mockPush.mock.calls[mockPush.mock.calls.length - 1][0]).toEqual({
+    //   query: { "testing-id-selected": "test-tab-2-id" },
+    // });
+  });
 });
