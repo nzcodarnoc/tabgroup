@@ -38,18 +38,16 @@ function getQuery(id) {
 const TabPanel = (props) => {
   const router = useRouter();
 
-  const [state, setState] = useState(
-    generateState(props.tabs, props.tabs[0].id)
-  );
+  const [state, setState] = useState(generateState(props.tabs, props.tabs[0].id));
 
   const activeTab = getQuery(props.id);
-  if (!activeTab || !state[activeTab]) {
+  if (!activeTab || !state[activeTab[0]]) {
     pushHistory(props.tabs[0].id, props.id, router);
   }
 
   useEffect(() => {
     const activeTab = getQuery(props.id);
-    if (activeTab && state[activeTab] && !state[activeTab].selected) {
+    if (activeTab && state[activeTab[0]] && !state[activeTab[0]].selected) {
       didSelectTab(activeTab);
     }
   }, [router.query]);
@@ -63,11 +61,7 @@ const TabPanel = (props) => {
   return (
     <div className="tabs">
       <div role="tablist" aria-label={props.label} className="tab-list">
-        <ButtonGroup
-          variant="text"
-          disableElevation
-          aria-label="outlined primary button group"
-        >
+        <ButtonGroup variant="text" disableElevation aria-label="outlined primary button group">
           {props.tabs.map((tab, index) => (
             <Tab
               key={index}
@@ -83,11 +77,7 @@ const TabPanel = (props) => {
       </div>
       <Paper>
         {props.tabs.map((tab, index) => (
-          <ContentPanel
-            key={index}
-            id={contentId(tab.id)}
-            selected={state[tab.id].selected}
-          >
+          <ContentPanel key={index} id={contentId(tab.id)} selected={state[tab.id].selected}>
             {tab.content}
           </ContentPanel>
         ))}
@@ -104,7 +94,7 @@ TabPanel.propTypes = {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.node.isRequired,
-    })
+    }),
   ).isRequired,
 };
 

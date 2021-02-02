@@ -13,15 +13,8 @@ jest.mock("next/router", () => ({
 
 describe("The TabPanel Component", () => {
   it("renders without crashing", () => {
-    render(
-      <TabPanel
-        id="testing"
-        label="testing"
-        tabs={[{ id: "test", title: "test", content: <div>test</div> }]}
-      />
-    );
+    render(<TabPanel id="testing" label="testing" tabs={[{ id: "test", title: "test", content: <div>test</div> }]} />);
   });
-
   it("renders multiple tabpanels without crashing", () => {
     render(
       <>
@@ -40,7 +33,7 @@ describe("The TabPanel Component", () => {
           label="3 testing"
           tabs={[{ id: "test3", title: "3 test", content: <div>3 test</div> }]}
         />
-      </>
+      </>,
     );
   });
   it("renders sets a default tab correctly", () => {
@@ -60,7 +53,7 @@ describe("The TabPanel Component", () => {
             content: <div>test content 2</div>,
           },
         ]}
-      />
+      />,
     );
     expect(screen.getByText("test title 1")).toBeVisible();
     expect(screen.getByText("test content 1")).toBeVisible();
@@ -102,7 +95,7 @@ describe("The TabPanel Component", () => {
             },
           ]}
         />
-      </>
+      </>,
     );
     expect(screen.getByText("test title 1")).toBeVisible();
     expect(screen.getByText("test content 1")).toBeVisible();

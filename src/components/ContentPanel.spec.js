@@ -3,6 +3,10 @@ import { render } from "@testing-library/react";
 import ContentPanel from "./ContentPanel";
 describe("The ContentPanel Component", () => {
   it("renders without crashing", () => {
-    render(<ContentPanel />);
+    render(
+      <ContentPanel id="test" selected={true}>
+        Test Content
+      </ContentPanel>,
+    );
   });
 });
